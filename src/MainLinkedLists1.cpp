@@ -27,32 +27,28 @@ Objectives of C-LinkedLists-1 Lesson:
 #include "FunctionHeadersLinkedLists1.h"
 #include<stdlib.h>
 struct node {
-	int digit1;
-	int digit2;
+	int num;
 	struct node *next;
 };
-struct node * createNode(int n1, int n2) {
+struct node * createNode(int num) {
 	struct node *newNode = (struct node *)malloc(sizeof(struct node));
-	newNode->digit1 = n1;
-	newNode->digit2 = n2;
+	newNode->num = num;
 	newNode->next = NULL;
 	return newNode;
 }
 
-void add(struct node **head, int p, int q){
-	struct node *temp = *head;
-	if (*head == NULL){
-		(*head) = createNode(p, q);
-		(*head)->next = NULL;
+struct node * createList(int num) {
+	struct node *head = createNode(num % 10);
+	num /= 10;
+	while (num) {
+		struct node *newNode = createNode(num % 10);
+		newNode->next = head;
+		head = newNode;
+		num /= 10;
 	}
-	else{
-		while (temp->next != NULL){
-			temp = temp->next;
-		}
-		temp->next = createNode(p, q);
-		temp->next->next = NULL;
-	}
+	return head;
 }
+
 int main(){
 
 	//Test 012SortSll
@@ -64,12 +60,8 @@ int main(){
 	//Test sortLinkedList
 
 	//Test twodigitLinkedList
-	int num = 0;
-	struct node *head = NULL;
-	add(&head, 1, 1);
-	add(&head, 2, 2);
-	add(&head, 3, 3);
-	num = convert_sll_2digit_to_int(head);
-
+	
+	struct node *head = createList(12345678);
+	head = removeEveryKthNode(head, 3);
 	return 0;
 }
