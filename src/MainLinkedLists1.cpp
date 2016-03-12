@@ -25,6 +25,32 @@ Objectives of C-LinkedLists-1 Lesson:
 //Do not edit below Header Files
 #include <stdio.h>
 #include "FunctionHeadersLinkedLists1.h"
+#include<stdlib.h>
+struct node {
+	int data;
+	struct node *next;
+};
+struct node * createNode(int n1) {
+	struct node *newNode = (struct node *)malloc(sizeof(struct node));
+	newNode->data = n1;
+	newNode->next = NULL;
+	return newNode;
+}
+
+void add(struct node **head, int p){
+	struct node *temp = *head;
+	if (*head == NULL){
+		(*head) = createNode(p);
+		(*head)->next = NULL;
+	}
+	else{
+		while (temp->next != NULL){
+			temp = temp->next;
+		}
+		temp->next = createNode(p);
+		temp->next->next = NULL;
+	}
+}
 
 int main(){
 
@@ -37,9 +63,17 @@ int main(){
 	//Test sortLinkedList
 
 	//Test twodigitLinkedList
-	int num = 123;
-	int A[] = { 8, 3, 4, 8 };
-	struct node *head = numberToLinkedList(num);
+	int num = 0;
+	struct node *head = NULL;
+	int num_array[100] = { 1, 2, 1, 1, 1, 2, 2, 0, 0, 0, 2, 1 };
+	int output[100] = { 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2 };
+	int len = 12;
+	int i = 0;
+	for (i = 0; i<len; i++)
+	{
+		add(&head, num_array[i]);
+	}
+	sll_012_sort(head);
 
 	return 0;
 }

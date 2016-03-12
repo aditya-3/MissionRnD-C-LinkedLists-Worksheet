@@ -12,12 +12,36 @@ NOTES: Without using extra array or linked list.
 */
 
 #include <stdio.h>
+void swap(int *a, int *b)
+{
+	int t;
+	t = *a;
+	*a = *b;
+	*b = t;
+}
 
 struct node {
 	int num;
 	struct node *next;
 };
 
-struct node * sortLinkedList(struct node *head) {
-	return NULL;
+struct node * sortLinkedList(struct node *root) {
+	if (root == NULL || root->next == NULL)
+		return root;
+	else
+	{
+		struct node *temp1 = root, *temp2 = root;
+		while (temp1 != NULL)
+		{
+			temp2 = root;
+			while (temp2 != NULL)
+			{
+				if (temp2->num>temp1->num)
+					swap(&(temp2->num), &(temp1->num));
+				temp2 = temp2->next;
+			}
+			temp1 = temp1->next;
+		}
+		return root;
+	}
 }
