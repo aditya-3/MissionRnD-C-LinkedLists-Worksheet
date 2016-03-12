@@ -37,6 +37,9 @@ int main(){
 	//Test sortLinkedList
 
 	//Test twodigitLinkedList
+	int num = 123;
+	int A[] = { 8, 3, 4, 8 };
+	struct node *head = numberToLinkedList(num);
 
 	return 0;
 }
