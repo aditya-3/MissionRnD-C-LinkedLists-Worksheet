@@ -27,31 +27,32 @@ Objectives of C-LinkedLists-1 Lesson:
 #include "FunctionHeadersLinkedLists1.h"
 #include<stdlib.h>
 struct node {
-	int data;
+	int digit1;
+	int digit2;
 	struct node *next;
 };
-struct node * createNode(int n1) {
+struct node * createNode(int n1, int n2) {
 	struct node *newNode = (struct node *)malloc(sizeof(struct node));
-	newNode->data = n1;
+	newNode->digit1 = n1;
+	newNode->digit2 = n2;
 	newNode->next = NULL;
 	return newNode;
 }
 
-void add(struct node **head, int p){
+void add(struct node **head, int p, int q){
 	struct node *temp = *head;
 	if (*head == NULL){
-		(*head) = createNode(p);
+		(*head) = createNode(p, q);
 		(*head)->next = NULL;
 	}
 	else{
 		while (temp->next != NULL){
 			temp = temp->next;
 		}
-		temp->next = createNode(p);
+		temp->next = createNode(p, q);
 		temp->next->next = NULL;
 	}
 }
-
 int main(){
 
 	//Test 012SortSll
@@ -65,15 +66,10 @@ int main(){
 	//Test twodigitLinkedList
 	int num = 0;
 	struct node *head = NULL;
-	int num_array[100] = { 1, 2, 1, 1, 1, 2, 2, 0, 0, 0, 2, 1 };
-	int output[100] = { 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2 };
-	int len = 12;
-	int i = 0;
-	for (i = 0; i<len; i++)
-	{
-		add(&head, num_array[i]);
-	}
-	sll_012_sort(head);
+	add(&head, 1, 1);
+	add(&head, 2, 2);
+	add(&head, 3, 3);
+	num = convert_sll_2digit_to_int(head);
 
 	return 0;
 }
